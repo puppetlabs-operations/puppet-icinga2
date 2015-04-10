@@ -18,6 +18,6 @@ object Zone "<%= @object_name %>" {
   global = <%= @global%>
   <%- end -%>
   <%- if @endpoints.length != 0 -%>
-      states = [ <%- @endpoints.each do |endpoint| -%> "<%= endpoint %>", <%- end -%>]
+      endpoints = [ <%- @endpoints.each do |endpoint| -%> "<%= endpoint %>", <%- end -%>]
   <%- end -%>
 }
