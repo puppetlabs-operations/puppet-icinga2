@@ -1,5 +1,8 @@
 class icinga2::db(
   $server_db_type = undef,
+  $db_name = undef,
+  $db_user = undef,
+  $db_password = undef,
 ){
 
   case $::operatingsystem {
