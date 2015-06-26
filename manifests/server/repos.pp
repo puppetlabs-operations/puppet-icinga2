@@ -1,6 +1,5 @@
 class icinga2::server::repos inherits icinga2::server {
 
-  include icinga2::server
 
   if $manage_repos == true {
     case $::operatingsystem {
