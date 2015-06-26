@@ -6,7 +6,10 @@ class icinga2::db(
   $db_password = undef,
 ){
 
-  include icinga2::server::repos
+  include icinga2::params
+  if $icinga2::params::use_debmon_repo {
+    include icinga2::server::repos
+  }
   case $::operatingsystem {
     'CentOS','RedHat': {
       #...and database that the user picks
