@@ -19,7 +19,6 @@ class icinga2::server::install inherits icinga2::server {
   #class on the right.
   #
   #Here, we're setting up the package repos first, then installing the packages:
-  class{'icinga2::server::repos':} ~>
   class{'icinga2::server::install::packages':} ~>
   class{'icinga2::server::install::execs':} ->
   Class['icinga2::server::install']
@@ -102,4 +101,5 @@ class icinga2::server::install::execs inherits icinga2::server {
 
     default: { fail("${server_db_type} is not supported!") }
   }
+}
 }
