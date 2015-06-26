@@ -14,19 +14,12 @@
 class icinga2::server::install inherits icinga2::server {
 
   include icinga2::server
+  include icinga2::server::repos
   #Apply our classes in the right order. Use the squiggly arrows (~>) to ensure that the
   #class left is applied before the class on the right and that it also refreshes the
   #class on the right.
   #
   #Here, we're setting up the package repos first, then installing the packages:
-  class{'icinga2::server::install::packages':} ~>
-  Class['icinga2::server::install']
-
-  include icinga2::server::repos
-#Install packages for Icinga 2:
-class icinga2::server::install::packages inherits icinga2::server {
-
-  include icinga2::server
 
   #Install the Icinga 2 package
   package {$icinga2_server_package:
@@ -52,5 +45,4 @@ class icinga2::server::install::packages inherits icinga2::server {
     }
   }
 
-}
 }
