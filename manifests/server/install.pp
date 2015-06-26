@@ -20,7 +20,6 @@ class icinga2::server::install inherits icinga2::server {
   #
   #Here, we're setting up the package repos first, then installing the packages:
   class{'icinga2::server::install::packages':} ~>
-  class{'icinga2::server::install::execs':} ->
   Class['icinga2::server::install']
 
   include icinga2::server::repos
