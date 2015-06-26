@@ -53,53 +53,5 @@ class icinga2::server::install::packages inherits icinga2::server {
     }
   }
 
-  #Pick the right DB lib package name based on the database type the user selected:
-  case $server_db_type {
-    #MySQL:
-    'mysql': { $icinga2_server_db_connector_package = 'icinga2-ido-mysql'}
-    #Postgres:
-    'pgsql': { $icinga2_server_db_connector_package = 'icinga2-ido-pgsql'}
-    default: { fail("${icinga2::params::server_db_type} is not a supported database! Please specify either 'mysql' for MySQL or 'pgsql' for Postgres.") }
-  }
-
-  #Install the IDO database connector package. See:
-  #http://docs.icinga.org/icinga2/latest/doc/module/icinga2/toc#!/icinga2/latest/doc/module/icinga2/chapter/getting-started#configuring-db-ido
-  package {$icinga2_server_db_connector_package:
-    ensure   => installed,
-    provider => $package_provider,
-  }
-
-}
-
-#This class contains exec resources
-class icinga2::server::install::execs inherits icinga2::server {
-
-  include icinga2::server
-
-  #Configure database schemas and IDO modules
-  case $server_db_type {
-    'mysql': {
-     #Enable the MySQL IDO module:
-      exec { 'mysql_module_enable':
-        user    => 'root',
-        path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
-        command => '/usr/sbin/icinga2 enable feature ido-mysql && touch /etc/icinga2/mysql_module_loaded.txt',
-        creates => '/etc/icinga2/mysql_module_loaded.txt',
-      }
-    }
-
-    'pgsql': {
-      #Load the Postgres DB schema:
-      #Enable the Postgres IDO module:
-      exec { 'postgres_module_enable':
-        user    => 'root',
-        path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
-        command => '/usr/sbin/icinga2 enable feature ido-pgsql && touch /etc/icinga2/postgres_module_loaded.txt',
-        creates => '/etc/icinga2/postgres_module_loaded.txt',
-      }
-    }
-
-    default: { fail("${server_db_type} is not supported!") }
-  }
 }
 }
