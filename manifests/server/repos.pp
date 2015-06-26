@@ -1,4 +1,4 @@
-class icinga2::server::install::repos inherits icinga2::server {
+class icinga2::server::repos inherits icinga2::server {
 
   include icinga2::server
 
