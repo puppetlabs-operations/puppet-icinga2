@@ -6,6 +6,7 @@ class icinga2::db(
   $db_password = undef,
 ){
 
+  include ::icinga2::server::repos
   case $::operatingsystem {
     'CentOS','RedHat': {
       #...and database that the user picks
