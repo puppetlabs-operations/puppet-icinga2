@@ -14,7 +14,7 @@
 class icinga2::server::install inherits icinga2::server {
 
   include icinga2::server
-  include icinga2::server::repos
+  include icinga2::repos
   #Apply our classes in the right order. Use the squiggly arrows (~>) to ensure that the
   #class left is applied before the class on the right and that it also refreshes the
   #class on the right.
