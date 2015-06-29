@@ -4,10 +4,11 @@ class icinga2::db(
   $db_name = undef,
   $db_user = undef,
   $db_password = undef,
+  $use_debmon_repo = $icinga2::params::use_debmnon_repo,
 ){
 
   include icinga2::params
-  if $icinga2::params::use_debmon_repo {
+  if $use_debmon_repo {
     include icinga2::server::repos
   }
   case $::operatingsystem {
