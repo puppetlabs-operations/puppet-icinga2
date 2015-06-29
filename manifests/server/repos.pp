@@ -1,7 +1,6 @@
 class icinga2::server::repos inherits icinga2::server {
 
 
-  if $manage_repos == true {
     case $::operatingsystem {
       #CentOS or RedHat systems:
       'CentOS', 'RedHat': {
@@ -48,8 +47,6 @@ class icinga2::server::repos inherits icinga2::server {
       #Fail if we're on any other OS:
       default: { fail("${::operatingsystem} is not supported!") }
     }
-  }
-
 }
 
 
