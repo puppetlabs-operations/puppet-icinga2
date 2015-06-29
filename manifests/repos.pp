@@ -28,7 +28,7 @@ class icinga2::repos inherits icinga2::server {
         include apt
 
         #On Debian (7) icinga2 packages are on backports
-        if $use_debmon_repo == false {
+        if $icinga2::use_debmon_repo == false {
           include apt::backports
         } else {
           apt::source { 'debmon':
