@@ -1,5 +1,5 @@
 class icinga2::db(
-  $server_db_type = undef,
+  $server_db_type = $icinga2::server_db_type,
   $db_host = undef,
   $db_name = undef,
   $db_user = undef,
@@ -40,23 +40,6 @@ class icinga2::db(
     #Fail if we're on any other OS:
     default: { fail("${::operatingsystem} is not supported!") }
   }
-
-  #Pick the right DB lib package name based on the database type the user selected:
-  case $server_db_type {
-    #MySQL:
-    'mysql': { $icinga2_server_db_connector_package = 'icinga2-ido-mysql'}
-    #Postgres:
-    'pgsql': { $icinga2_server_db_connector_package = 'icinga2-ido-pgsql'}
-    default: { fail("${icinga2::params::server_db_type} is not a supported database! Please specify either 'mysql' for MySQL or 'pgsql' for Postgres.") }
-  }
-
-  #Install the IDO database connector package. See:
-  #http://docs.icinga.org/icinga2/latest/doc/module/icinga2/toc#!/icinga2/latest/doc/module/icinga2/chapter/getting-started#configuring-db-ido
-  package {$icinga2_server_db_connector_package:
-    ensure   => installed,
-    provider => $package_provider,
-  }
-
   case $server_db_type {
     'mysql': {
       #Load the MySQL DB schema:
