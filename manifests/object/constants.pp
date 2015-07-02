@@ -1,4 +1,4 @@
-define icinga2::object::zone(
+define icinga2::object::constants(
   $object_name = $name,
   $constants = undef,
   $target_dir              = '/etc/icinga2/objects/constants',
