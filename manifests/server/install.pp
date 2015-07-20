@@ -27,6 +27,8 @@ class icinga2::server::install inherits icinga2::server {
     provider => $package_provider,
   }
 
+  include icinga2::db::packages
+
   if $server_install_nagios_plugins == true {
     #Install the Nagios plugins packages:
     package {$icinga2_server_plugin_packages:

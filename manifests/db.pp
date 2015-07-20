@@ -7,6 +7,7 @@ class icinga2::db(
 ){
 
   include icinga2::params
+  include icinga2::db::packages
   case $::operatingsystem {
     'CentOS','RedHat': {
       #...and database that the user picks
