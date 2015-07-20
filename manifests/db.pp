@@ -6,6 +6,7 @@ class icinga2::db(
   $db_password = undef,
 ){
 
+  include icinga2
   include icinga2::params
   include icinga2::db::packages
   case $::operatingsystem {
@@ -49,7 +50,7 @@ class icinga2::db(
         path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
         command => "mysql -u ${db_user} -p${db_password} ${db_name} < ${server_db_schema_path} && touch /etc/icinga2/mysql_schema_loaded.txt",
         creates => '/etc/icinga2/mysql_schema_loaded.txt',
-        require => Package[$icinga2_server_db_connector_package],
+        require => Package[$icinga2::icinga2_server_db_connector_package],
       }
     }
 
@@ -60,7 +61,7 @@ class icinga2::db(
         path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
         command => "su - postgres -c 'export PGPASSWORD='\\''${db_password}'\\'' && psql -U ${db_user} -h ${db_host} -d ${db_name} < ${server_db_schema_path}' && export PGPASSWORD='' && touch /etc/icinga2/postgres_schema_loaded.txt",
         creates => '/etc/icinga2/postgres_schema_loaded.txt',
-        require => Package[$icinga2_server_db_connector_package],
+        require => Package[$icinga2::icinga2_server_db_connector_package],
       }
     }
 
