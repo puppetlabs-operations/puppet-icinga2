@@ -16,6 +16,8 @@ class icinga2::params {
   #This section has parameters that are used by both the client and server subclasses
 
   ##################
+
+  $config_template = 'icinga2/icinga2.conf.erb'
   # Icinga 2 common package parameters
   case $::operatingsystem {
     #CentOS or RedHat systems:

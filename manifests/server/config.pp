@@ -44,7 +44,7 @@ class icinga2::server::config inherits icinga2::server {
     owner   => $etc_icinga2_icinga2_conf_owner,
     group   => $etc_icinga2_icinga2_conf_group,
     mode    => $etc_icinga2_icinga2_conf_mode,
-    content => template('icinga2/icinga2.conf.erb'),
+    content => template($icinga2::server::config_template),
   }
 
   #Directory resource for /etc/icinga2/conf.d/:
