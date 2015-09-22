@@ -34,11 +34,6 @@ class icinga2::feature::ido_pgsql (
   $categories           = [],
 ) {
 
-  package { 'icinga2-ido-pgsql':
-    ensure   => installed,
-    provider => $::icinga2::package_provider,
-  }
-
   ::icinga2::object::idopgsqlconnection { 'ido-pgsql':
     host                 => $host,
     port                 => $port,
