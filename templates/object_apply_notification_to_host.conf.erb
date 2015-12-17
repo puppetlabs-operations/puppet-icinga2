@@ -45,7 +45,7 @@ apply Notification "<%= @object_notificationname %>" to Host {
   interval = <%= @interval %>
   <%- end -%>
   <%- if @period -%>
-  period = "<%= @period -%>"
+  period = <%= @period -%>
   <%- end -%>
   <%- if @types.empty? !=true -%>
   types = [ <% @types.each_with_index do |typ, i| %><%= typ -%><%= ', ' if i < (@types.size - 1) %><% end %> ]
