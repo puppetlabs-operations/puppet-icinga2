@@ -23,10 +23,14 @@ define icinga2::object::zone(
   ensure_resource('icinga2::config::objectdir', 'zones')
 
   if $endpoints {
-    validate_hash($endpoints)
-    $_endpoints = keys($endpoints)
-
-    create_resources('icinga2::object::endpoint', $endpoints)
+    if is_hash($endpoints) {
+      $_endpoints = keys($endpoints)
+      create_resources('icinga2::object::endpoint', $endpoints)
+    }
+    else {
+      validate_array($endpoints)
+      $_endpoints = $endpoints
+    }
   }
   else {
     $_endpoints = undef
