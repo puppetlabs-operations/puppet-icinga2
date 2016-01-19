@@ -2,7 +2,9 @@
 #
 # Managing Icinga2's IDO database
 #
-class icinga2::database {
+class icinga2::database(
+  $manage_schema = false,
+){
 
   validate_re($::icinga2::db_type, '^(mysql|pgsql)$', "Database type ${::icinga2::db_type} is not supported!")
 
@@ -19,7 +21,6 @@ class icinga2::database {
   validate_absolute_path($db_schema)
 
   if $::icinga2::db_type == 'mysql' {
-    include ::icinga2::feature::ido_mysql
 
     # TODO: is there a better way?
     Package['icinga2-ido-mysql'] ->
@@ -31,7 +32,6 @@ class icinga2::database {
     }
   }
   elsif $::icinga2::db_type == 'pgsql' {
-    include ::icinga2::feature::ido_pgsql
 
     # TODO: is there a better way?
     if $::icinga2::db_port {
