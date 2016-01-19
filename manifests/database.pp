@@ -22,6 +22,10 @@ class icinga2::database(
 
   if $::icinga2::db_type == 'mysql' {
 
+    package { 'icinga2-ido-mysql':
+      ensure   => $::icinga2::package_ensure,
+    }
+
     # TODO: is there a better way?
     Package['icinga2-ido-mysql'] ->
     exec { 'mysql_schema_load':
@@ -32,6 +36,10 @@ class icinga2::database(
     }
   }
   elsif $::icinga2::db_type == 'pgsql' {
+
+    package { 'icinga2-ido-pgsql':
+      ensure   => $::icinga2::package_ensure,
+    }
 
     # TODO: is there a better way?
     if $::icinga2::db_port {

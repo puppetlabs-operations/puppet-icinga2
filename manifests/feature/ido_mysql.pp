@@ -52,6 +52,7 @@ class icinga2::feature::ido_mysql (
     categories           => $categories,
     target_file_name     => 'ido-mysql.conf',
     target_dir           => '/etc/icinga2/features-available',
+    require              => Package['icinga2-ido-mysql'],
   } ->
 
   ::icinga2::feature { 'ido-mysql':
