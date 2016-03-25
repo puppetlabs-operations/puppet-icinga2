@@ -20,7 +20,7 @@ module Puppet
               return value.to_f
             else
               # remove quotes from oldstyle values "something"
-              value = value.gsub(/(^"|"$)/, '')
+              value = value.gsub(/^"(.*)"$/, '\1')
             end
           end
           value.to_s.dump
