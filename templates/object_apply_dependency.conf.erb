@@ -19,10 +19,10 @@ apply Dependency "<%= @object_name %>" to "<%= @object_type %>"{
   child_host_name = "<%= @child_host_name -%>"
   <%- end -%>
   <%- if @parent_service_name -%>
-  parent_service_name = "<%= @parent_service_name -%>"
+  parent_service_name = <%= @parent_service_name -%>
   <%- end -%>
   <%- if @child_service_name -%>
-  child_service_name = "<%= @child_service_name -%>"
+  child_service_name = <%= @child_service_name -%>
   <%- end -%>
   <%- if @disable_checks -%>
   disable_checks = <%= @disable_checks %>
